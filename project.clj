@@ -1,5 +1,5 @@
-(defproject serverlessclojurebowling "0.1.0-SNAPSHOT"
-  :description "My first attempt at using Clojure with AWS Lambda"
+(defproject bowlorama-calculator "0.1.0-SNAPSHOT"
+  :description "Add description here"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
@@ -7,5 +7,5 @@
                  [org.clojure/data.json "0.2.6"]
                  [uswitch/lambada "0.1.0"]]
   :profiles {:uberjar {:aot :all}}
-  :uberjar-name "bowling-scorer.jar")
+  :uberjar-name "bowlorama-calculator.jar")
 

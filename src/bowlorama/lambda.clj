@@ -1,7 +1,7 @@
-(ns clojurebowling.lambda
+(ns bowlorama.lambda
   (:require [uswitch.lambada.core :refer [deflambdafn]]
             [clojure.data.json :as json]
-            [clojurebowling.bowling-scorer :as bowling-scorer]
+            [bowlorama.calculator :as bcalc]
             [clojure.string :as str]
             [clojure.java.io :as io]))
 
@@ -10,19 +10,17 @@
   [s]
   (Integer/parseInt (re-find #"\A-?\d+" s)))
 
-(defn handle-event
+
+(defn handle-score-event
   [event]
-  (let [score (bowling-scorer/score (map parse-int (seq (str/split (get event "rolls") #","))))]
-    (println "The bowling score is: " score)
-
+  (let [score (bcalc/score (map parse-int (seq (str/split (get event "rolls") #","))))]
     {:status "HUMBABY",
-     :score  score}
-    ))
+     :score  score}))
 
-(deflambdafn clojurebowling.lambda.MyLambdaFn
+(deflambdafn bowlorama.lambda.score
              [in out ctx]
              (let [event (json/read (io/reader in))
-                   res (handle-event event)]
+                   res (handle-score-event event)]
                (with-open [w (io/writer out)]
                  (json/write res w))))
 
@@ -30,14 +28,11 @@
 
 (defn handle-to-frames-event
   [event]
-  (let [framescores (bowling-scorer/to-frames (map parse-int (seq (str/split (get event "rolls") #","))))]
-    (println "The list of frame scores would be: " framescores)
-
+  (let [framescores (bcalc/to-frames (map parse-int (seq (str/split (get event "rolls") #","))))]
     {:status "BOOYAH",
-     :framescores  framescores}
-    ))
+     :framescores  framescores}))
 
-(deflambdafn clojurebowling.lambda.to-frames
+(deflambdafn bowlorama.lambda.to-frames
              [in out ctx]
              (let [event (json/read (io/reader in))
                    res (handle-to-frames-event event)]

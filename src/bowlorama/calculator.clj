@@ -1,6 +1,4 @@
-(ns clojurebowling.calculator
-  (:require [clojure.test :refer :all]
-            [clojurebowling.calculator :as bowling-scorer]))
+(ns bowlorama.calculator)
 
 (defn is-strike
   "Returns true if the first roll in a frame was 10"
@@ -43,6 +41,7 @@
   [rolls]
   (reduce + (take 10 (to-frames rolls))))
 
+; The start of something to validate input...need more time for that
 ;(defn is-valid-input
 ;  "Returns true if the rolls given are valid input to a bowling score calculator"
 ;  [rolls]
