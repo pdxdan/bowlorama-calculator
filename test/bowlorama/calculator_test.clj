@@ -1,6 +1,6 @@
-(ns clojurebowling.bowling-scorer_test
+(ns clojurebowling.calculator-test
   (:require [clojure.test :refer :all]
-            [clojurebowling.bowling-scorer :as bowling-scorer]))
+            [clojurebowling.calculator :as bowling-scorer]))
 
 (deftest is-strike
   (testing "should identify a strike if the first roll in a frame was 10"

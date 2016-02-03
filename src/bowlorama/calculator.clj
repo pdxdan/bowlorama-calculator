@@ -1,6 +1,6 @@
-(ns clojurebowling.bowling-scorer
+(ns clojurebowling.calculator
   (:require [clojure.test :refer :all]
-            [clojurebowling.bowling-scorer :as bowling-scorer]))
+            [clojurebowling.calculator :as bowling-scorer]))
 
 (defn is-strike
   "Returns true if the first roll in a frame was 10"
