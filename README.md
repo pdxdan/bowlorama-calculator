@@ -2,7 +2,7 @@
 
 Part of the bowlorama demo application. This piece provides a functional programming approach to the classic 
 bowling game score calculator. The functions here have now side affects and attempt to encapsulate the voodoo
-of calulating bowling scores. 
+of calculating bowling scores. 
  
 Two functions are exposed from this library to Lambda:
 - bowlorama-sore, which calculates a score from a series of rolls. 

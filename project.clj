@@ -1,5 +1,5 @@
 (defproject bowlorama-calculator "0.1.0-SNAPSHOT"
-  :description "Add description here"
+  :description "Part of the bowlorama demo application that calculates bowling scores based on ball history."
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
