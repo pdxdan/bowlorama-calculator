@@ -1,0 +1,66 @@
+# The real solution wpi to use CloudFormation to deploy and update everything.
+# I'm currently evaluating various Lambda deployment/management frameworks,
+# preferably one that relies on Cloudformation to manage everything in an
+# idempotent way.
+# Until I'm further along with that, here's some AWS CLI commands for deploying
+# and updating the functions.
+
+--------------------------------------------------------------------------------
+
+Publishing the initial version of the function:
+
+ aws lambda create-function \
+     --region us-west-2 \
+     --function-name bowlorama-score \
+     --description 'Compute the total score for a given set of rolls' \
+     --zip-file fileb://$(pwd)/target/bowlorama-calculator.jar \
+     --role arn:aws:iam::558628704292:role/lambda_basic_execution \
+     --handler bowlorama.lambda.score \
+     --runtime java8 \
+     --timeout 15 \
+     --memory-size 512
+
+
+ aws lambda create-function \
+     --region us-west-2 \
+     --function-name bowlorama-to-frames \
+     --description 'Returns a list of scores for each frame' \
+     --zip-file fileb://$(pwd)/target/bowlorama-calculator.jar \
+     --role arn:aws:iam::558628704292:role/lambda_basic_execution \
+     --handler bowlorama.lambda.to-frames \
+     --runtime java8 \
+     --timeout 15 \
+     --memory-size 512
+
+--------------------------------------------------------------------------------
+
+Publishing an updated version of the function:
+
+aws lambda update-function-code \
+--region us-west-2 \
+--function-name bowlorama-score \
+--zip-file fileb://$(pwd)/target/bowlorama-calculator.jar \
+--publish
+
+aws lambda update-function-code \
+--region us-west-2 \
+--function-name bowlorama-to-frames \
+--zip-file fileb://$(pwd)/target/bowlorama-calculator.jar \
+--publish
+
+
+--------------------------------------------------------------------------------
+TESTING
+
+curl -H "Content-Type: application/json" \
+-X POST \
+-d '{"rolls":"10,1,2,3,4"}' \
+https://oarmnm6fg3.execute-api.us-west-2.amazonaws.com/prod/bowlorama-score
+
+
+SAMPLE JSON FOR score
+{
+    "rolls": "10,1,2,3,4"
+}
+should return 23
+--------------------------------------------------------------------------------
