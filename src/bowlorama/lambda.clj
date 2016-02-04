@@ -14,8 +14,7 @@
 (defn handle-score-event
   [event]
   (let [score (bcalc/score (map parse-int (seq (str/split (get event "rolls") #","))))]
-    {:status "HUMBABY",
-     :score  score}))
+    {:score  score}))
 
 (deflambdafn bowlorama.lambda.score
              [in out ctx]
@@ -23,8 +22,6 @@
                    res (handle-score-event event)]
                (with-open [w (io/writer out)]
                  (json/write res w))))
-
-
 
 (defn handle-to-frames-event
   [event]
