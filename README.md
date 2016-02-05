@@ -8,6 +8,10 @@ Two functions are exposed from this library to Lambda:
 - bowlorama-sore, which calculates a score from a series of rolls. 
 - bowlorama-to-frames, which calculates the score for each frame from a series of rolls.
 
+The other pieces of Bowlorama are in the following repos:
+https://github.com/pdxdan/bowlorama-calculator
+https://github.com/pdxdan/bowlorama-history-tracker
+https://github.com/pdxdan/bowlorama-jsclient
 
 ## Usage
 
